@@ -10,41 +10,61 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            HashSet<string> rules = getRules(args);
+            DisplayRuleSet(rules);
             int maxNumber = getMaxNumber();
             
             for(int i = 1; i <= maxNumber; i++)
             {
-                Console.WriteLine(getOutputMethod1(i));
+                Console.WriteLine(GetOutput(i,rules));
             }
             Console.ReadLine();
         }
-        static string getOutputMethod1(int i)
+        static void DisplayRuleSet(HashSet<String> rules)
+        {
+            Console.WriteLine("Ruleset: ");
+            foreach (string rule in rules)
+            {
+                Console.WriteLine("  {0}", rule);
+            }
+        }
+        static HashSet<String> getRules(string[] args)
+        {
+            HashSet<string> rules = new HashSet<string>();
+
+            foreach(string rule in args)
+            {
+                rules.Add(rule);
+            }
+            return rules;
+        }
+        static string GetOutput(int i, HashSet<String> rules)
         {
             List<String> outputList = new List<String>();
             string output = "";
-            Boolean needsReversing = false;
+            Boolean needsReversing = false;           
 
-            if (i % 3 == 0)
+            if (i % 3 == 0 && rules.Contains("3"))
             {
                 outputList.Add("Fizz");
             }
-            if(i % 5 == 0)
+            if(i % 5 == 0 && rules.Contains("5"))
             {
                 outputList.Add("Buzz");
             }
-            if(i % 7 == 0)
+            if(i % 7 == 0 && rules.Contains("7"))
             {
                 outputList.Add("Bang");
             }
-            if(i % 11 == 0)
+            if(i % 11 == 0 && rules.Contains("11"))
             {
                 outputList.Add("Bong");
             }
-            if(i % 13 == 0)
+            if(i % 13 == 0 && rules.Contains("13"))
             {
                 outputList.Add("Fezz");
             }
-            if(i % 17 == 0)
+            if(i % 17 == 0 && rules.Contains("17"))
             {
                 needsReversing = true;
             }
@@ -74,7 +94,7 @@ namespace ConsoleApp1
             return output;
         }
 
-        /*static string getOutputMethod2(int i)
+        /*static string GetOutputMethod2(int i)
         {
 
             //if(i%5==0 && i % 3 == 0)
