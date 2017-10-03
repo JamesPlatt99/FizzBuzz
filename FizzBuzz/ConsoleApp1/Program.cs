@@ -68,6 +68,7 @@ namespace ConsoleApp1
             rules.Add(3, "Fizz");
             rules.Add(5, "Buzz");
             rules.Add(7, "Bang");
+            String x;
 
             Boolean validInput = false;
             while (!validInput)
@@ -76,7 +77,7 @@ namespace ConsoleApp1
                 
                     validInput = true;
                     //IEnumerable fizzBuzz = Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).SelectMany(n => from rule in rules where n % rule.Key == 0 select n+  rule.Value).ToList();
-                IEnumerable fizzBuzz = Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).Select(n => (String.Join("" , rules.Where( a => n % a.Key == 0).Select(b=> b.Value))) == "" ? n.ToString() : (String.Join("", rules.Where(a => n % a.Key == 0).Select(b => b.Value)))).ToList();
+                IEnumerable fizzBuzz = Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).Select(n => (x = String.Join("" , rules.Where( a => n % a.Key == 0).Select(b=> b.Value))) == "" ? n.ToString() : x).ToList();
                 foreach (String val in fizzBuzz)
                     {
                         Console.WriteLine(val);
