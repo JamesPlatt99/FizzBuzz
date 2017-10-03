@@ -30,54 +30,69 @@ namespace ConsoleApp1
                 List<String> outputList = new List<String>();
                 string output = "";
                 Boolean needsReversing = false;
+            //Simple rules - where a string is just added to the end of the output.
+            Dictionary<int, String> simpleRules = new Dictionary<int, string>();
+            simpleRules.Add(3, "Fizz");
+            simpleRules.Add(5, "Buzz");
+            simpleRules.Add(7, "Bang");
+            foreach (KeyValuePair<int,String> rule in simpleRules)
+            {
+                if(i % rule.Key == 0 && rules.Contains(rule.Key.ToString()))
+                {
+                    outputList.Add(rule.Value);
+                }
+            }
 
-                if (i % 3 == 0 && rules.Contains("3"))
+            if (i%13==0 && rules.Contains("13"))
+            {
+                Boolean found = false;
+                for(int j = 0; j<outputList.Count;j++)
                 {
-                    outputList.Add("Fizz");
+                    if(outputList[j].ToCharArray()[0] == 'B')
+                    {
+                        found = true;
+                        outputList[j] = "Fezz" + outputList[j];
+                        break;
+                    }
                 }
-                if (i % 5 == 0 && rules.Contains("5"))
-                {
-                    outputList.Add("Buzz");
-                }
-                if (i % 7 == 0 && rules.Contains("7"))
-                {
-                    outputList.Add("Bang");
-                }
-                if (i % 11 == 0 && rules.Contains("11"))
-                {
-                    outputList.Add("Bong");
-                }
-                if (i % 13 == 0 && rules.Contains("13"))
+                if (!found)
                 {
                     outputList.Add("Fezz");
                 }
-                if (i % 17 == 0 && rules.Contains("17"))
+            }
+            if (i % 11 == 0 && rules.Contains("11"))
+            {
+                outputList = new List<string>();
+                outputList.Add("Bong");
+            }
+            if (i % 17 == 0 && rules.Contains("17"))
                 {
                     needsReversing = true;
                 }
-                if (outputList.Count == 0)
+            //Checks if the current number has not met any of the rules
+            if (outputList.Count == 0)
+            {
+                output = i.ToString();
+            }
+            else
+            {
+                //Checks whether list needs to be reversed
+                if (!needsReversing)
                 {
-                    output = i.ToString();
+                    for (int j = 0; j < outputList.Count; j++)
+                    {
+                        output += outputList[j];
+                    }
                 }
                 else
                 {
-                    //Checks whether list needs to be reversed
-                    if (!needsReversing)
-                    {
-                        for (int j = 0; j < outputList.Count; j++)
-                        {
-                            output += outputList[j];
-                        }
-                    }
-                    else
-                    {
 
-                        for (int j = outputList.Count - 1; j >= 0; j--)
-                        {
-                            output += outputList[j];
-                        }
+                    for (int j = outputList.Count - 1; j >= 0; j--)
+                    {
+                        output += outputList[j];
                     }
                 }
+            }
                 _outputs.Add(output);
         }
 

@@ -15,6 +15,7 @@ namespace ConsoleApp1
                 Console.WriteLine("Fizz Buzz");
                 Console.WriteLine("   1. IEnumerable interface challenge");
                 Console.WriteLine("   2. One Liner challenge");
+                Console.WriteLine("   3. One Liner v2");
                 String input = Console.ReadLine();
                 switch (input)
                 {
@@ -23,6 +24,9 @@ namespace ConsoleApp1
                         break;
                     case "2":
                         OneLiner();
+                        break;
+                    case "3":
+                        OneLinerV2();
                         break;
                 }
                 Console.WriteLine();
@@ -58,5 +62,29 @@ namespace ConsoleApp1
                 }
             }
         }
+        public static void OneLinerV2()
+        {
+            Dictionary<int,String> rules = new Dictionary<int,string>();
+            rules.Add(3, "Fizz");
+            rules.Add(5, "Buzz");
+            rules.Add(7, "Bang");
+
+            Boolean validInput = false;
+            while (!validInput)
+            {
+                Console.Write("Please enter your max value: ");
+                
+                    validInput = true;
+                    //IEnumerable fizzBuzz = Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).SelectMany(n => from rule in rules where n % rule.Key == 0 select n+  rule.Value).ToList();
+                IEnumerable fizzBuzz = Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).Select(n => (String.Join("" , rules.Where( a => n % a.Key == 0).Select(b=> b.Value))) == "" ? n.ToString() : (String.Join("", rules.Where(a => n % a.Key == 0).Select(b => b.Value)))).ToList();
+                foreach (String val in fizzBuzz)
+                    {
+                        Console.WriteLine(val);
+                    }
+
+                
+            }
+        }
+        
     }
 }
