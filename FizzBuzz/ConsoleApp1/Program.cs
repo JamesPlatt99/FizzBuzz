@@ -12,29 +12,62 @@ namespace ConsoleApp1
         {
             for(int i = 1; i <= 100; i++)
             {
-                Console.WriteLine(getOutput(i));
+                Console.WriteLine(getOutputMethod1(i));
             }
             Console.ReadLine();
         }
-        static string getOutput(int i)
+        static string getOutputMethod1(int i)
         {
+            List<String> outputList = new List<String>();
             string output = "";
+            int numSeventeens = 0;
+
             if (i % 3 == 0)
             {
-                output += "Fizz";
+                outputList.Add("Fizz");
             }
             if(i % 5 == 0)
             {
-                output += "Buzz";
+                outputList.Add("Buzz");
             }
-            if(output == "")
+            if(i % 7 == 0)
+            {
+                outputList.Add("Bang");
+            }
+            if(i % 13 == 0)
+            {
+                outputList.Add("Fezz");
+            }
+            if(i % 17 == 0)
+            {
+                numSeventeens++;
+            }
+            if(outputList.Count ==0)
             {
                 output = i.ToString();
+            }
+            else
+            {
+                if(numSeventeens % 2 == 0)
+                {
+                    for(int j =0; j < outputList.Count; j++)
+                    {
+                        output += outputList[j];
+                    }
+                }
+                else
+                {
+
+                    for (int j = outputList.Count - 1; j >= 0; j--)
+                    {
+                        output += outputList[j];
+                    }
+                }
             }
             return output;
         }
 
-        static string getOutputMethod2(int i)
+        /*static string getOutputMethod2(int i)
         {
 
             //if(i%5==0 && i % 3 == 0)
@@ -55,7 +88,6 @@ namespace ConsoleApp1
                 return "Fizz";
             }
             return i.ToString();
-        }
-        
+        }*/
     }
 }
