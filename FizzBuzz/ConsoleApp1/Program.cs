@@ -10,7 +10,9 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            for(int i = 1; i <= 255; i++)
+            int maxNumber = getMaxNumber();
+            
+            for(int i = 1; i <= maxNumber; i++)
             {
                 Console.WriteLine(getOutputMethod1(i));
             }
@@ -94,5 +96,20 @@ namespace ConsoleApp1
             }
             return i.ToString();
         }*/
+        
+        static int getMaxNumber()
+        {
+            Console.Write("Please enter the max number: ");
+            string input;
+            input = Console.ReadLine();
+            int output;
+            while (!int.TryParse(input, out output))
+            {
+                Console.WriteLine("Sorry, that value is invalid. Please try again.");
+                Console.Write("Please enter the max number: ");
+                input = Console.ReadLine();
+            }
+            return output;
+        }
     }
 }
