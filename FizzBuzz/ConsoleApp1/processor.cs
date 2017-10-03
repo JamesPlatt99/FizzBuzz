@@ -9,14 +9,24 @@ namespace ConsoleApp1
 {
     class processor : IEnumerable<String>
     {
-        public List<String> _outputs = new List<String>();   
+        private List<String> _outputs = new List<String>();
 
-        public void GetOutput(HashSet<String> rules)
+        public void Start(string[] args)
         {
-            int maxNumber = getMaxNumber();
+            processor fizzBuzzer = new processor();
+            HashSet<string> rules = fizzBuzzer.getRules(args);
+            DisplayRuleSet(rules);
+
+            int maxNumber = GetMaxNumber();
 
             for (int i = 1; i <= maxNumber; i++)
             {
+                GetOutput(i, rules);
+            }
+        }
+
+        private void GetOutput(int i, HashSet<String> rules)
+        {            
                 List<String> outputList = new List<String>();
                 string output = "";
                 Boolean needsReversing = false;
@@ -69,10 +79,9 @@ namespace ConsoleApp1
                     }
                 }
                 _outputs.Add(output);
-            }
         }
 
-        public HashSet<String> getRules(string[] args)
+        private HashSet<String> getRules(string[] args)
         {
             HashSet<string> rules = new HashSet<string>();
 
@@ -83,7 +92,7 @@ namespace ConsoleApp1
             return rules;
         }
 
-        public void DisplayRuleSet(HashSet<String> rules)
+        private void DisplayRuleSet(HashSet<String> rules)
         {
             Console.WriteLine("Ruleset: ");
             foreach (string rule in rules)
@@ -92,7 +101,7 @@ namespace ConsoleApp1
             }
         }
 
-        public int getMaxNumber()
+        public int GetMaxNumber()
         {
             Console.Write("Please enter the max number: ");
             string input;
