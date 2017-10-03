@@ -33,5 +33,29 @@ namespace ConsoleApp1
             }
             return output;
         }
+
+        static string getOutputMethod2(int i)
+        {
+
+            //if(i%5==0 && i % 3 == 0)
+            //{
+            //    return "FizzBuzz";
+            //}
+            //Simplified version, all factors of both 5 and 3 must be factors of 15 (5 * 3)
+            if (i % 15 == 0)
+            {
+                return "FizzBuzz";
+            }
+            if(i % 5 == 0)
+            {
+                return "Buzz";
+            }
+            if(i % 3 == 0)
+            {
+                return "Fizz";
+            }
+            return i.ToString();
+        }
+        
     }
 }
