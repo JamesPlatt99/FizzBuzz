@@ -73,17 +73,20 @@ namespace ConsoleApp1
             Boolean validInput = false;
             while (!validInput)
             {
-                Console.Write("Please enter your max value: ");
-                
+                try { 
+                    Console.Write("Please enter your max value: ");
+                    
                     validInput = true;
-                    //IEnumerable fizzBuzz = Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).SelectMany(n => from rule in rules where n % rule.Key == 0 select n+  rule.Value).ToList();
-                IEnumerable fizzBuzz = Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).Select(n => (x = String.Join("" , rules.Where( a => n % a.Key == 0).Select(b=> b.Value))) == "" ? n.ToString() : x).ToList();
-                foreach (String val in fizzBuzz)
-                    {
-                        Console.WriteLine(val);
-                    }
+                    Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).Select(n => (x = String.Join("" , rules.Where( a => n % a.Key == 0).Select(b=> b.Value))) == "" ? n.ToString() : x).ToList().ForEach(Console.WriteLine);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    validInput = false;
+                }
 
-                
+
+
             }
         }
         
