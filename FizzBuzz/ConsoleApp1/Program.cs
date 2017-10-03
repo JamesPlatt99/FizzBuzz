@@ -10,7 +10,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            for(int i = 1; i <= 100; i++)
+            for(int i = 1; i <= 255; i++)
             {
                 Console.WriteLine(getOutputMethod1(i));
             }
@@ -20,7 +20,7 @@ namespace ConsoleApp1
         {
             List<String> outputList = new List<String>();
             string output = "";
-            int numSeventeens = 0;
+            Boolean needsReversing = false;
 
             if (i % 3 == 0)
             {
@@ -34,13 +34,17 @@ namespace ConsoleApp1
             {
                 outputList.Add("Bang");
             }
+            if(i % 11 == 0)
+            {
+                outputList.Add("Bong");
+            }
             if(i % 13 == 0)
             {
                 outputList.Add("Fezz");
             }
             if(i % 17 == 0)
             {
-                numSeventeens++;
+                needsReversing = true;
             }
             if(outputList.Count ==0)
             {
@@ -48,7 +52,8 @@ namespace ConsoleApp1
             }
             else
             {
-                if(numSeventeens % 2 == 0)
+                //Checks whether list needs to be reversed
+                if(!needsReversing)
                 {
                     for(int j =0; j < outputList.Count; j++)
                     {
