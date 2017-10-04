@@ -55,9 +55,9 @@ namespace ConsoleApp1
                     //Here's the one line that it needs
                     Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).Select(n => (n % 15 == 0) ? "FizzBuzz" : (n % 3 == 0) ? "Fizz" : (n % 5 == 0) ? "Buzz" : n.ToString()).ToList().ForEach(Console.WriteLine);
                 }
-                catch
+                catch(Exception e)
                 {
-                    Console.WriteLine("Invalid input, please try again.");
+                    Console.WriteLine(e.Message);
                     validInput = false;
                 }
             }
@@ -65,10 +65,17 @@ namespace ConsoleApp1
         public static void OneLinerV2()
         {
             Dictionary<int,String> rules = new Dictionary<int,string>();
+            String input;
+            Random rnd = new Random();
+            String tmpStr;
+            Char tmpChar;
+
+
             Console.WriteLine("Please choose a ruleset: ");
             Console.WriteLine(" 1. Write me a wicked new rap song");
             Console.WriteLine(" 2. Normal");
-            if (Console.ReadLine() == "1")
+            Console.WriteLine(" 3. Just generate some nonsense");
+            if ((input = Console.ReadLine() )== "1")
             {
                 rules.Add(72, "Bang");
                 rules.Add(8, "Boom");
@@ -85,9 +92,30 @@ namespace ConsoleApp1
                 rules.Add(7, "DaTingGoes");
                 rules.Add(6, "NoKetchup");
                 rules.Add(1, "Skkrrrrat");
+                rules.Add(3, "PumPoom");
+                rules.Add(5, "Drr'aaap");
+            }else if (input == "3")
+            {
+                for(int i = 1; i < 100; i++)
+                {
+                    tmpStr = "";
+                    if(rnd.Next(1,100) % 2 == 0)
+                    {
+                        tmpChar = (char)(rnd.Next(65, 80));
+                        tmpStr += tmpChar.ToString();
+                        for (int j = 1; j < rnd.Next(3, 7); j++)
+                        {
+                            tmpChar = (char)(rnd.Next(97, 122));
+                            tmpStr += tmpChar.ToString();
+                        }
+                        rules.Add(i, tmpStr);
+                    }
+                }
             }
+            else {             
             rules.Add(3, "Fizz");
             rules.Add(5, "Buzz");
+            }
             String x;
 
             Boolean validInput = false;
@@ -97,12 +125,9 @@ namespace ConsoleApp1
                     Console.Write("Please enter your max value: ");
                     
                     validInput = true;
-                    //Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).Select(n => (x = String.Join("" , rules.Where( a => n % a.Key == 0).Select(b=> b.Value))) == "" ? n.ToString() : x).ToList().ForEach(Console.WriteLine);
                     Enumerable.Range(1, Convert.ToInt32(Console.ReadLine())).Select(
-                        i => Tuple.Create(i, string.Join("", rules.Where(rule => i % rule.Key == 0).Select(rule => rule.Value))))
-                        .Select(p => p.Item2 == "" ? p.Item1.ToString() : p.Item2)
-                        .ToList()
-                        .ForEach(Console.WriteLine);
+                        n => (x = String.Join("" , rules.Where( a => n % a.Key == 0).Select(b=> b.Value))) == "" ? n.ToString() 
+                        : x).ToList().ForEach(Console.WriteLine);
                 }
                 catch (Exception e)
                 {
